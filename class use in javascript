@@ -1,0 +1,106 @@
+//save this file as backpack.js
+//i have made two javascript file containing book and backpack characteristics
+//and then one js file conating books and backpacks objects and one html file
+class Backpack {
+  constructor(
+    name,
+    volume,
+    color,
+    pocketNum,
+    strapLengthL,
+    strapLengthR,
+    lidOpen,
+    dateAcquired
+  ) {
+    this.name = name;
+    this.volume = volume;
+    this.color = color;
+    this.pocketNum = pocketNum;
+    this.strapLength = {
+      left: strapLengthL,
+      right: strapLengthR,
+    };
+    this.lidOpen = lidOpen;
+    this.dateAcquired = dateAcquired;
+  }
+  toggleLid(lidStatus) {
+    this.lidOpen = lidStatus;
+  }
+  newStrapLength(lengthLeft, lengthRight) {
+    this.strapLength.left = lengthLeft;
+    this.strapLength.right = lengthRight;
+  }
+  backpackAge() {
+    let now = new Date();
+    let acquired = new Date(this.dateAcquired);
+    let elapsed = now - acquired; // elapsed time in milliseconds
+    let daysSinceAcquired = Math.floor(elapsed / (1000 * 3600 * 24));
+    return daysSinceAcquired;
+  }
+}
+
+export default Backpack;
+//save this file as book.js
+class Book {
+  constructor(genre, publishedBy, releaseDate, price) {
+    this.genre = genre;
+    this.publishedBy = publishedBy;
+    this.releaseDate = releaseDate;
+    this.price = price;
+  }
+  bookage() {
+    let now = new Date();
+    let aquired = new Date(this.releaseDate);
+    let elpased = now - aquired;
+    let dayssincereleased = Math.floor(elpased / (1000 * 3600 * 24));
+    return dayssincereleased;
+  }
+}
+export default Book;
+//save this file as index.js
+import Backpack from "./Backpack.js";
+
+const everydayPack = new Backpack(
+  "Everyday Backpack",
+  30,
+  "grey",
+  15,
+  26,
+  26,
+  false,
+  "December 5, 2018 15:00:00 PST"
+);
+
+console.log("The everydayPack object:", everydayPack);
+console.log("The pocketNum value:", everydayPack.pocketNum);
+console.log("Days since aquired:", everydayPack.backpackAge());
+import Book from "./Book.js";
+
+const Ekta = new Book("drama", "chetan bhagat", "december 15,2009", 500);
+const rahul = new Book("romance", "arundhati roy", "january 18,2012", 900);
+const ravi = new Book("poetry", "j.k rowling", "march 25,2017", 600);
+const neelam = new Book("thriller", "salman rushdie", "june 5,2012", 1400);
+const parul = new Book("emotional", "vikram seth", "december 31,2012", 2000);
+console.log("ekta:", Ekta);
+console.log("dayssincerelease", Ekta.bookage());
+console.log("rahul", rahul);
+console.log("dayssincerelease", rahul.bookage());
+console.log("ravi", ravi);
+console.log("dayssincerelease", ravi.bookage());
+console.log("neelam", neelam);
+console.log("dayssincerelease", neelam.bookage());
+console.log("parul", parul);
+console.log("dayssincerelease", parul.bookage());
+//save this file as main.html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Challenge: Create a new object type</title>
+    <script type="module" src="Backpack.js"></script>
+    <script type="module" src="script.js"></script>
+    <script type="module" src="book.js"></script>
+  </head>
+  <body></body>
+</html>
