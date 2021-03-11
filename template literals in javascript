@@ -1,0 +1,121 @@
+//create book.js file with class book and declare properties then using "this" populate properties ,then if needed create function that contains method ,then use export command 
+//it will help in importing this object in other javascript files.
+class Book {
+  constructor(name, genre, author, dateofrelease, numberofpages, price, image) {
+    this.name = name;
+    this.genre = genre;
+    this.author = author;
+    this.dateofrelease = dateofrelease;
+    this.numberofpages = numberofpages;
+    this.price = price;
+    this.image = image;
+  }
+  Bookage() {
+    let now = new Date();
+    let acquired = new Date(this.dateofrelease);
+    let elapsed = acquired - now;
+    let dayssincerelease = Math.floor(elapsed / (1000 * 3600 * 24));
+    return dayssincerelease;
+  }
+}
+
+export default Book;
+
+
+//make other javascript file script.js where we want to import this object and create template literals .
+import Book from "./Book.js";
+const book1 = new Book(
+  "The Four Winds",
+  "Fiction",
+  "kristen hannah",
+  "02-02-21",
+  464,
+  "$22",
+  "url"//input path for your image or url 
+);
+const book2 = new Book(
+  "Think Again",
+  "NonFiction",
+  "adam grant",
+  "02-02-2021",
+  320,
+  "$17",
+  "url"//input path for your image or url
+);
+
+console.log(book1);
+console.log(book2);
+//template litrals are used to create web page content in js file only rather than in html
+
+const main = document.querySelector(".maincontent");
+
+const ebook = ` <main class="maincontent">
+<div class="page-header">
+  <h2 class="page-header__heading">Book Suggestions For Beginners </h2>
+  <p>
+    If you're looking for famous books and tired from searching different sites here
+    is one stop solution for <b>YOU!</b>
+     
+  </p>
+</div>
+<article class="books" id="pack01">
+  
+  <h1 class="book__name">name:${book1.name}</h1>
+  <figure class="book__image">
+    <img src="${book1.image}" alt="here is image" loading="lazy" />
+  </figure>
+  <ul class="book__features">
+    <li class="feature book__genre">Genre:<span>${book1.genre}</span></li>
+    <li class="feature book__author">Author:<span>${book1.author}</span></li>
+    <li class="feature book__DATE">DateOfRelease:<span>${book1.dateofrelease}</span></li>
+    <li class="feature book__age">
+      DaysSinceRelease:<span> ${book1.dayssincerelease}</span>
+    </li>
+    <li class="feature book__price">Price:<span>${book1.price}</li>
+    </article>
+    <article class="books" id="pack02">
+
+  <h1 class="book__name">name:${book2.name}</h1>
+  <figure class="book__image">
+  <img src="${book2.image}" alt="here is image" loading="lazy" />
+</figure>
+  <ul class="book__features">
+    <li class="feature book__genre">Genre:<span>${book2.genre}</span></li>
+    <li class="feature book__author">Author:<span>${book2.author}</span></li>
+    <li class="feature book__DATE">DateOfRelease:<span>${book2.dateofrelease}</span></li>
+    <li class="feature book__age">
+      DaysSinceRelease:<span> ${book2.dayssincerelease}</span>
+    </li>
+    <li class="feature book__price">Price:<span>${book2.price}</li>
+    </article>
+
+    `;
+
+main.innerHTML = ebook;
+
+
+//create html file containing bot javascript files and css stylesheet
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Best Seller Books 2021</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&amp;family=Work+Sans:wght@100..900&amp;display=swap"
+    />
+    <link rel="stylesheet" href="book.css" type="text/css" media="All" />
+    <script type="module" src="Book.js"></script>
+    <script type="module" src="script.js"></script>
+  </head>
+  <header class="siteheader">
+    <div class="site-title">Best Seller Books 2021</div>
+    <div class="site-description">Famous Book refernces</div>
+  </header>
+  <main class="maincontent"></main>
+  <footer class="sitefooter">
+    <p>thanks for visiting this webpage</p>
+  </footer>
+  <body></body>
+</html>
+
